@@ -10,6 +10,7 @@
     "clean": "gulp clean"
   },
   "author": "AlexKVal",
+  "repository": "https://github.com/AlexKVal/playground-skeleton",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.2.5",
@@ -24,6 +25,11 @@
     "reactify": "^1.1.0",
     "uglifyify": "^3.0.1",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^2.4.0"
+    "watchify": "^2.4.0",
+    "eslint": "^0.19.0",
+    "eslint-plugin-react": "^2.1.1"
+  },
+  "dependencies": {
+    "react-bootstrap": "^0.20.3"
   }
 }

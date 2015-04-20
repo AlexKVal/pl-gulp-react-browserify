@@ -1,7 +1,20 @@
-function JustCheck() {
-  console.log('check1');
-}
+var React = require('react');
+var ReactBoostrap = require('react-bootstrap');
 
-module.exports = JustCheck;
+var Input = ReactBoostrap.Input;
+var Button = ReactBoostrap.Button;
 
-console.log('main loaded');
+var App = React.createClass({
+
+  render: function() {
+    return (
+      <div>
+        <Input type='text' placeholder='Enter text'/>
+        <Button bsStyle='primary'>Default</Button>
+      </div>
+    );
+  }
+
+});
+
+React.render(<App />, document.getElementById('app'));
