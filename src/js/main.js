@@ -1,16 +1,20 @@
 var React = require('react');
 var ReactBoostrap = require('react-bootstrap');
 
-var Input = ReactBoostrap.Input;
-var Button = ReactBoostrap.Button;
+var ListGroup = ReactBoostrap.ListGroup;
+var ListGroupItem = ReactBoostrap.ListGroupItem;
 
 var App = React.createClass({
 
   render: function() {
+    var items = [
+      <ListGroupItem>Item 1</ListGroupItem>
+    ];
     return (
       <div>
-        <Input type='text' placeholder='Enter text'/>
-        <Button bsStyle='primary'>Default</Button>
+        <ListGroup>
+          {items}
+        </ListGroup>
       </div>
     );
   }
