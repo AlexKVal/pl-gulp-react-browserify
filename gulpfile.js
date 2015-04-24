@@ -4,14 +4,14 @@ var notify = require('gulp-notify');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 var envify = require('envify');
-var reactify = require('reactify');
+var babelify = require('babelify');
+// var reactify = require('reactify');
 var uglifyify = require('uglifyify');
 var browserSync = require('browser-sync');
 var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var gStreamify = require('gulp-streamify');
 var del = require('del');
-// npm i --save-dev gulp browserify gulp-notify vinyl-source-stream watchify envify reactify uglifyify browser-sync gulp-util gulp-uglify gulp-streamify del
 
 // Config options
 var inJs = './src/js/main.js';
@@ -48,7 +48,8 @@ function scripts(watch) {
     bundler = watchify(bundler);
   }
 
-  bundler.transform(reactify);
+  // bundler.transform(reactify);
+  bundler.transform(babelify);
   bundler.transform({global: true}, envify);
 
   if(production) {
