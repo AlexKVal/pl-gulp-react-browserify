@@ -1,17 +1,17 @@
 var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('browserify');
 var notify = require('gulp-notify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var watchify = require('watchify');
-var envify = require('envify');
 var babelify = require('babelify');
-// var reactify = require('reactify');
-var uglifyify = require('uglifyify');
 var browserSync = require('browser-sync');
 var gutil = require('gulp-util');
-var uglify = require('gulp-uglify');
-var gStreamify = require('gulp-streamify');
 var del = require('del');
+// var envify = require('envify');
+// var uglifyify = require('uglifyify');
+// var uglify = require('gulp-uglify');
 
 // Config options
 var inJs = './src/js/main.js';
@@ -34,46 +34,38 @@ gulp.task('clean', function(cb) {
   return cb();
 });
 
-function scripts(watch) {
-  var bundler, rebundle;
-  bundler = browserify({
+function compile(watch) {
+  var bundler = watchify(browserify({
     basedir: __dirname,
     debug: !production,
     entries: inJs,
     cache: {},
     packageCache: {},
     fullPaths: watch
-  });
-  if(watch) {
-    bundler = watchify(bundler);
+  }).transform(babelify));
+
+  function rebundle() {
+    return bundler.bundle()
+      .on('error', handleError('Browserify'))
+      .pipe(source(outJs))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(outJsDir));
   }
 
-  // bundler.transform(reactify);
-  bundler.transform(babelify);
-  bundler.transform({global: true}, envify);
-
-  if(production) {
-    bundler.transform({global: true}, uglifyify);
+  if (watch) {
+    bundler.on('update', function() {
+      rebundle().pipe(browserSync.reload({stream: true}));
+      gutil.log('Rebundle...');
+    });
   }
 
-  rebundle = function() {
-    var stream = bundler.bundle();
-    stream.on('error', handleError('Browserify'));
-
-    stream = stream.pipe(source(outJs));
-
-    if(production) {
-      stream.pipe(gStreamify(uglify()));
-    }
-
-    return stream.pipe(gulp.dest(outJsDir));
-  };
-  bundler.on('update', function() {
-    rebundle().pipe(browserSync.reload({stream: true}));
-    gutil.log('Rebundle...');
-  });
-  return rebundle();
+  rebundle();
 }
+
+// gulp.task('build', function() { return compile(); });
+gulp.task('watchJS', function() { return compile(true); });
 
 gulp.task('html', function() {
   return gulp.src(inHtml)
@@ -85,21 +77,7 @@ gulp.task('watchHtml', function() {
   return gulp.watch(inHtml, ['html']);
 });
 
-// production
-gulp.task('scripts', function() {
-  production = true;
-  process.env.NODE_ENV = 'production';
-  return scripts(false);
-});
-// production
-gulp.task('build', ['html', 'scripts']);
-
-// development
-gulp.task('watchScripts', function() {
-  return scripts(true);
-});
-
-gulp.task('browser-sync', ['html', 'watchHtml', 'watchScripts'], function() {
+gulp.task('browser-sync', ['html', 'watchHtml', 'watchJS'], function() {
   browserSync({ server: { baseDir: outDir } });
 });
 

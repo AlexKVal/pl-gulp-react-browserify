@@ -5,7 +5,6 @@
   "main": "build/main.js",
   "scripts": {
     "start": "gulp",
-    "prod": "gulp build",
     "test": "gulp test",
     "clean": "gulp clean"
   },
@@ -13,20 +12,20 @@
   "repository": "https://github.com/AlexKVal/playground-skeleton",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^3.0.1",
     "babelify": "^6.0.2",
     "browser-sync": "^2.2.5",
     "browserify": "^9.0.3",
     "del": "^1.1.1",
-    "envify": "^3.3.1",
     "eslint": "^0.19.0",
     "eslint-plugin-react": "^2.1.1",
     "gulp": "^3.8.11",
     "gulp-notify": "^2.2.0",
+    "gulp-sourcemaps": "^1.5.2",
     "gulp-streamify": "0.0.5",
-    "gulp-uglify": "^1.1.0",
     "gulp-util": "^3.0.4",
     "reactify": "^1.1.0",
-    "uglifyify": "^3.0.1",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.1.2"
   },

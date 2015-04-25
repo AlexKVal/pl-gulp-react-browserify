@@ -1,8 +1,5 @@
-var React = require('react');
-var ReactBoostrap = require('react-bootstrap');
-
-var ListGroup = ReactBoostrap.ListGroup;
-var ListGroupItem = ReactBoostrap.ListGroupItem;
+import React from 'react';
+import {Button, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 var App = React.createClass({
 
@@ -12,6 +9,7 @@ var App = React.createClass({
     ];
     return (
       <div>
+        <Button bsStyle='primary'>This is the Button 2</Button>
         <ListGroup>
           {items}
         </ListGroup>
