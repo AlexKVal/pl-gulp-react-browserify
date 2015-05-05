@@ -1,2 +1,5 @@
 var gobble = require( 'gobble' );
-module.exports = gobble( 'src/root' );
+module.exports = gobble([
+  gobble( 'src/root' ),
+  gobble( 'src/js' ).transform( 'babel' )
+]);
