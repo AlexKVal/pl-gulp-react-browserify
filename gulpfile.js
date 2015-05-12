@@ -22,19 +22,19 @@ var outDir = './build';
 
 var production = process.env.NODE_ENV === 'production';
 
-function handleError(task) {
-  return function(err) {
+function handleError (task) {
+  return function (err) {
     gutil.log(gutil.colors.red(err));
     notify.onError(task + ' failed, check the logs..')(err);
   };
 }
 
-gulp.task('clean', function(cb) {
+gulp.task('clean', function (cb) {
   del(outDir);
   return cb();
 });
 
-function compile(watch) {
+function compile (watch) {
   var bundler = watchify(browserify({
     basedir: __dirname,
     debug: !production,
@@ -44,7 +44,7 @@ function compile(watch) {
     fullPaths: watch
   }).transform(babelify));
 
-  function rebundle() {
+  function rebundle () {
     return bundler.bundle()
       .on('error', handleError('Browserify'))
       .pipe(source(outJs))
@@ -55,7 +55,7 @@ function compile(watch) {
   }
 
   if (watch) {
-    bundler.on('update', function() {
+    bundler.on('update', function () {
       rebundle().pipe(browserSync.reload({stream: true}));
       gutil.log('Rebundle...');
     });
@@ -65,19 +65,19 @@ function compile(watch) {
 }
 
 // gulp.task('build', function() { return compile(); });
-gulp.task('watchJS', function() { return compile(true); });
+gulp.task('watchJS', function () { return compile(true); });
 
-gulp.task('html', function() {
+gulp.task('html', function () {
   return gulp.src(inHtml)
     .pipe(gulp.dest(outDir))
     .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('watchHtml', function() {
+gulp.task('watchHtml', function () {
   return gulp.watch(inHtml, ['html']);
 });
 
-gulp.task('browser-sync', ['html', 'watchHtml', 'watchJS'], function() {
+gulp.task('browser-sync', ['html', 'watchHtml', 'watchJS'], function () {
   browserSync({ server: { baseDir: outDir } });
 });
 

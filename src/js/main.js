@@ -2,8 +2,9 @@ import React from 'react';
 import {Button, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 var App = React.createClass({
+  displayName: 'App',
 
-  render: function() {
+  render: function () {
     var items = [
       <ListGroupItem>Item 1</ListGroupItem>
     ];
