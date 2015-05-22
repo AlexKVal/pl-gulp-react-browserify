@@ -2,28 +2,38 @@
 import React from 'react';
 
 import {
-  // Input,
-  ButtonInput
+  Navbar,
+  Nav,
+  MenuItem,
+  DropdownMenu
 } from 'react-bootstrap';
+
+const Auth = React.createClass({
+  render: function () {
+    return (
+      <DropdownMenu title="Hello" noCaret>
+        <h6>Login with</h6>
+        <MenuItem href="/auth/facebook">
+          Facebook
+        </MenuItem>
+        <MenuItem href="/auth/twitter">
+          Twitter
+        </MenuItem>
+      </DropdownMenu>
+    );
+  }
+});
 
 const App = React.createClass({
   displayName: 'App',
 
   render: function () {
     return (
-      <form>
-        <ButtonInput
-          bsSize="small">Child Text</ButtonInput>
-        <ButtonInput
-          type="reset"
-          bsStyle="primary" />
-        <ButtonInput
-          type="submit"
-          value="Submit Your Input"
-          bsStyle="info"
-          bsSize="large"
-          disabled={false} />
-      </form>
+      <Navbar inverse>
+        <Nav right>
+          <Auth />
+        </Nav>
+      </Navbar>
     );
   }
 });
