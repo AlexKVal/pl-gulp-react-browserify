@@ -5,13 +5,13 @@ import {
   Navbar,
   Nav,
   MenuItem,
-  DropdownMenu
+  DropdownButton
 } from 'react-bootstrap';
 
 const Auth = React.createClass({
   render: function () {
     return (
-      <DropdownMenu title="Hello" noCaret>
+      <DropdownButton title="Hello" noCaret navItem>
         <h6>Login with</h6>
         <MenuItem href="/auth/facebook">
           Facebook
@@ -19,7 +19,7 @@ const Auth = React.createClass({
         <MenuItem href="/auth/twitter">
           Twitter
         </MenuItem>
-      </DropdownMenu>
+      </DropdownButton>
     );
   }
 });
