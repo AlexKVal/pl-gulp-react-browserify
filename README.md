@@ -1,3 +1,11 @@
-# playground-skeleton
+# pl-gulp-react-browserify
 
-Branch with [gobble](https://github.com/AlexKVal/playground-skeleton/tree/gobble)
+Gulp
+React
+Browserify
+Babel
+Eslint
+Browser-Sync
+Semistandard
+
+Branch with [gobble](https://github.com/AlexKVal/pl-gulp-react-browserify/tree/gobble)

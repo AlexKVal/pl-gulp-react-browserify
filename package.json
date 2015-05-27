@@ -1,6 +1,6 @@
 {
   "name": "playground",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "playground",
   "main": "build/main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "clean": "gulp clean"
   },
   "author": "AlexKVal",
-  "repository": "https://github.com/AlexKVal/playground-skeleton",
+  "repository": "https://github.com/AlexKVal/pl-gulp-react-browserify",
   "license": "ISC",
   "devDependencies": {
     "babel-eslint": "^3.0.1",
