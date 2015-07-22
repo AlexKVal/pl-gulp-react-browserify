@@ -1,5 +1,9 @@
 # pl-gulp-react-browserify
 
+this is a playground project.
+it is subject to be deleted at any time.
+
+
 Gulp
 
 React
